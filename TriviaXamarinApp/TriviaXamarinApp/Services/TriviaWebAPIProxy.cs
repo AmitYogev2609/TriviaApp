@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace TriviaXamarinApp.Services
 {
-    class TriviaWebAPIProxy
+    public class TriviaWebAPIProxy
     {
         private HttpClient client;
         private string baseUri;

@@ -9,11 +9,12 @@ namespace TriviaXamarinApp
 {
     public partial class App : Application
     {
+        public TriviaWebAPIProxy WebAPI { get; set; }
         public App()
         {
             InitializeComponent();
-            
-            
+
+            WebAPI = TriviaWebAPIProxy.CreateProxy();
             MainPage = new MainPage();
         }
 
