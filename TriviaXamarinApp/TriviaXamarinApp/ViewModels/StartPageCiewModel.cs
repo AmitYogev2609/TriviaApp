@@ -10,8 +10,10 @@ namespace TriviaXamarinApp.ViewModels
     class StartPageCiewModel
     {
         public string Question { get; set; }
-        public ObservableCollection<string> MyProperty { get; set; }
-        public string  NumCorrectQus { get; set; }
+        public string qustion;
+        public ObservableCollection<string> answerList  { get; set; }
+        public string NumCorrectQus { get; set; }
+        private string numco;
         private int indexcorect;
         public StartPageCiewModel()
         {
