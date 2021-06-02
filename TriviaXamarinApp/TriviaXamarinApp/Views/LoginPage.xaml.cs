@@ -12,10 +12,18 @@ namespace TriviaXamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        public LoginPage()
+        public LoginPage( )
         {
             InitializeComponent();
-            this.BindingContext = new StartPageCiewModel();
+            LoginViewModel context = new LoginViewModel();
+            context.NavigateToPageEvent += NavigateToAsync;
+
+            this.BindingContext = context;
+            
+        }
+        public async void NavigateToAsync(Page p)
+        {
+            await Navigation.PushAsync(p);
         }
     }
 }

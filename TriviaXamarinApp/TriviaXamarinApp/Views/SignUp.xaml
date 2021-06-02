@@ -4,9 +4,22 @@
              x:Class="TriviaXamarinApp.Views.SignUp">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Sign UP"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" FontSize="Header" />
+            <Frame BackgroundColor="LightGray" CornerRadius="50">
+                <Entry Placeholder="email" Text="{Binding Email }"/>
+            </Frame>
+            <Frame BackgroundColor="LightGray" CornerRadius="50">
+                <Entry Placeholder="NickName" Text="{Binding NickName }"/>
+            </Frame>
+            <Frame BackgroundColor="LightGray" CornerRadius="50">
+                <Entry Placeholder="Password" Text="{Binding Password }"/>
+            </Frame>
+            <Frame CornerRadius="50">
+                <Button Text="Sign Up" Command="{Binding SignUp}"/>
+            </Frame>
+            <Label Text="Smothing went worng. try to enter anther email " IsVisible="{Binding IsVisible}" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

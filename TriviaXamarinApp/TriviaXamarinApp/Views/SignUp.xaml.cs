@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TriviaXamarinApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +15,16 @@ namespace TriviaXamarinApp.Views
         public SignUp()
         {
             InitializeComponent();
+            this.BindingContext = new SignUpViewModel ();
+            ((SignUpViewModel)this.BindingContext).NavigateToPageEvent += PopNavigateToAsync;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+        public async void PopNavigateToAsync()
+        {
+            await Navigation.PopAsync();
         }
     }
 }

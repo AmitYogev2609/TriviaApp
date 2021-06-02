@@ -7,9 +7,21 @@
              x:Class="TriviaXamarinApp.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Welcome to trivia game the best trivia game in the world" FontSize="Title"/>
+            <Button Text="Log In" Command="{Binding LogInVisible}" IsVisible="{Binding LogVis}"/>
+            <StackLayout IsVisible="{Binding IsVisible}">
+                <Frame BackgroundColor="LightGray" CornerRadius="50">
+                    <Entry Placeholder="email" Text="{Binding Email }"/>
+                </Frame>
+                <Frame BackgroundColor="LightGray" CornerRadius="50">
+                    <Entry Placeholder="password" Text="{Binding Password }"/>
+                </Frame>
+                <Frame CornerRadius="50">
+                    <Button Text="Log In" Command="{Binding LogIn}"/>
+                </Frame>
+                <Label Text="{Binding ErrorMes}" IsVisible="{Binding erorMesVis }" TextColor="Red" FontSize="Body"/>
+            </StackLayout>
+            <Button Text="Sign Up" Command="{Binding SignUp}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
