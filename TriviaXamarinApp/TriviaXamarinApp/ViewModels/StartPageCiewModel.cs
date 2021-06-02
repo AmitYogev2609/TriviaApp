@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Input;
 using Xamarin.Forms;
 using TriviaXamarinApp.Models;
@@ -71,18 +72,19 @@ namespace TriviaXamarinApp.ViewModels
         }
         public async void SetupQus()
         {
-            ChangeColor = Color.LightSkyBlue;
             answerList.Clear();
             AmericanQuestion american= await TriviaWebAPIProxy.CreateProxy().GetRandomQuestion();
             Question = american.QText;
             CurrnetCoAnswer = american.CorrectAnswer;
+            
             answerList.Add(CurrnetCoAnswer);
             foreach (var item in american.OtherAnswers)
             {
                 answerList.Add(item);
             }
             Shuffle(answerList);
-          
+            ChangeColor = Color.White;
+
 
         }
         public static void Shuffle( IList<string> list)
@@ -109,24 +111,27 @@ namespace TriviaXamarinApp.ViewModels
         }
         public ICommand PressCommand => new Command(refreshAnCheck);
 
-        public  void refreshAnCheck()
+        public async void refreshAnCheck()
         {
-            
-            if(CurrnetCoAnswer==CorectAnswer)
+            bool con = false;
+            if (CurrnetCoAnswer == CorectAnswer)
             {
                 NumCorrectQus++;
-                
-                if(NumCorrectQus>3)
-                {
-                   
-
-                    
-                   
-                  
-                }
+                this.ChangeColor = Color.Green;
                
+                if (NumCorrectQus > 3)
+                {
+
+                    con = true;
+                    change();
+                }
+
             }
-            SetupQus();
+            else ChangeColor = Color.Red;
+            if (!con)
+            {
+                SetupQus();
+            }
         }
     }
 }
