@@ -38,17 +38,6 @@ namespace TriviaXamarinApp.ViewModels
                 }
             } }
         private int numco;
-        public Color chooseanswer { get =>colorchoos; set
-            {
-                if(colorchoos!=value)
-                {
-                    colorchoos = value;
-                    OnPropertyChanged(nameof(chooseanswer));
-                }
-            } }
-        private Color colorchoos;
-        public Color AnswerColor { get; set; }
-        private Color answercolor;
         public string CorectAnswer { get=>corectAnswer; set
             {
                 if (value!=corectAnswer)
@@ -59,28 +48,35 @@ namespace TriviaXamarinApp.ViewModels
                  } }
         string corectAnswer;
         private string CurrnetCoAnswer;
-        public ICommand selectionComamd => new Command(ChangeColor);
-        public ICommand PressCommand => new Command(refreshAnCheck);
+        public Color ChangeColor { get=>Color; set
+            {
+                if(value!=Color)
+                {
+                    Color = value;
+                    OnPropertyChanged(nameof(ChangeColor));
+                }
+            } }
+        private Color Color;
+
         public StartPageCiewModel()
         {
             answerList = new ObservableCollection<string>();
             numco = 0;
-            chooseanswer = new Color();
-            chooseanswer = Color.White;
-            colorchoos = new Color();
-            colorchoos = Color.White;
-            answercolor = new Color();
-            answercolor = Color.White;
-            AnswerColor = new Color();
-            AnswerColor = Color.White;
+
+            ChangeColor = new Color();
+            Color = new Color();
+            
+           
             SetupQus();
         }
         public async void SetupQus()
         {
+            ChangeColor = Color.LightSkyBlue;
+            answerList.Clear();
             AmericanQuestion american= await TriviaWebAPIProxy.CreateProxy().GetRandomQuestion();
             Question = american.QText;
             CurrnetCoAnswer = american.CorrectAnswer;
-            answerList.Add(corectAnswer);
+            answerList.Add(CurrnetCoAnswer);
             foreach (var item in american.OtherAnswers)
             {
                 answerList.Add(item);
@@ -105,27 +101,32 @@ namespace TriviaXamarinApp.ViewModels
                 list[n] = value;
             }
         }
-        void ChangeColor()
+        public ICommand GotoLogin => new Command(change);
+        public void change()
         {
-            chooseanswer = Color.Blue;
+            App.Current.MainPage = ((App)App.Current).login;
+
         }
-        public async void refreshAnCheck()
+        public ICommand PressCommand => new Command(refreshAnCheck);
+
+        public  void refreshAnCheck()
         {
+            
             if(CurrnetCoAnswer==CorectAnswer)
             {
                 NumCorrectQus++;
-                AnswerColor = Color.Green;
-                if(NumCorrectQus==3)
+                
+                if(NumCorrectQus>3)
                 {
-                    //פתיחת מסך חדש
+                   
+
+                    
+                   
+                  
                 }
-                else
-                {
-                    //await
-                    Task t = new Task(SetupQus);
-                    t.Wait(2500);
-                }
+               
             }
+            SetupQus();
         }
     }
 }

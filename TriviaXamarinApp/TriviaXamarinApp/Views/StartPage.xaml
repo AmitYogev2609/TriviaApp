@@ -4,27 +4,69 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TriviaXamarinApp.Views.StartPage">
-    <ContentPage.Content>
+             x:Class="TriviaXamarinApp.Views.StartPage"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="{Binding ChangeColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems  >
+
+        <ToolbarItem
+            Text="{Binding NumCorrectQus,StringFormat='Number of correct answer:{0}'}"
+            
+            Order="Primary"
+            />
+        <ToolbarItem Text="Login"
+                Command="{Binding GotoLogin}"
+                 Order="Primary"
+                  />
         
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+       
         <StackLayout>
+            <Label Text="Answer 3 correct answer and enter your own one "/>
             <Label Text="{Binding Question, StringFormat='Question: {0}'}"/>
+           
             <CollectionView ItemsSource="{Binding answerList}" 
                 SelectionMode="Single"
-               SelectionChangedCommand="selectionComamd" SelectedItem="{Binding CorectAnswer}"  x:Name="answerslst">
+                SelectedItem="{Binding CorectAnswer}"  x:Name="answerslst">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame CornerRadius="50">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding}"/>
-                                <Frame CornerRadius="1000" BackgroundColor="{Binding chooseanswer}"/>
-                            </StackLayout>
+                            <Grid >
+                            <Grid.RowDefinitions>
+                                
+                            </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding}" Grid.Column="0"/>
+                                <Frame CornerRadius="1000"   HorizontalOptions="End" Grid.Column="1" />
+                            </Grid>
                         </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <StackLayout Orientation="Horizontal">
-                <Button  />
+                <Button Text="check answer" Command="{Binding PressCommand}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
