@@ -11,7 +11,7 @@
             <Label Text="{Binding Question, StringFormat='Question: {0}'}"/>
             <CollectionView ItemsSource="{Binding answerList}" 
                 SelectionMode="Single"
-               SelectionChangedCommand="" x:Name="answerslst">
+               SelectionChangedCommand="selectionComamd" SelectedItem="{Binding CorectAnswer}"  x:Name="answerslst">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame CornerRadius="50">
