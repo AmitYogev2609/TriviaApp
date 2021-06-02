@@ -6,10 +6,26 @@
              mc:Ignorable="d"
              x:Class="TriviaXamarinApp.Views.StartPage">
     <ContentPage.Content>
+        
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Question, StringFormat='Question: {0}'}"/>
+            <CollectionView ItemsSource="{Binding answerList}" 
+                SelectionMode="Single"
+               SelectionChangedCommand="" x:Name="answerslst">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="50">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding}"/>
+                                <Frame CornerRadius="1000" BackgroundColor="{Binding chooseanswer}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout Orientation="Horizontal">
+                <Button  />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
