@@ -21,7 +21,7 @@ namespace TriviaXamarinApp
             InitializeComponent();
 
             WebAPI = TriviaWebAPIProxy.CreateProxy();
-            MainPage = new NavigationPage(new StartPage());
+            MainPage = new NavigationPage(new TabbedPage());
             intial = MainPage;
             login = new NavigationPage(new LoginPage());
             IsNew = false;
