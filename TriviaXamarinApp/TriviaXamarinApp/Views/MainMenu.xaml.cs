@@ -31,6 +31,7 @@ namespace TriviaXamarinApp.Views
         {
             await Navigation.PushAsync(p);
         }
+        
 
     }
 }

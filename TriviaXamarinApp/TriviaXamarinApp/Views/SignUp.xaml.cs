@@ -18,9 +18,11 @@ namespace TriviaXamarinApp.Views
             this.BindingContext = new SignUpViewModel ();
             ((SignUpViewModel)this.BindingContext).NavigateToPageEvent += PopNavigateToAsync;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ((SignUpViewModel)this.BindingContext).rest();
         }
         public async void PopNavigateToAsync()
         {

@@ -103,15 +103,23 @@ namespace TriviaXamarinApp.ViewModels
                 CorrectAnswer=RightAnswer,
                 OtherAnswers=list.ToArray()
             };
-            bool IsAdd = await TriviaWebAPIProxy.CreateProxy().PostNewQuestion(question);
-            if(IsAdd)
+            try
             {
-                ((App)App.Current).CurrnetUser.Questions.Add(question);
-                NavigateBackToPageEvent?.Invoke();
+                bool IsAdd = await TriviaWebAPIProxy.CreateProxy().PostNewQuestion(question);
+                if (IsAdd)
+                {
+                    ((App)App.Current).CurrnetUser.Questions.Add(question);
+                   
+                    NavigateBackToPageEvent?.Invoke();
+                }
+                else
+                {
+                    IsVisible = true;
+                }
             }
-            else
+            catch(Exception e)
             {
-                IsVisible = true;
+                
             }
         }
         public event Action NavigateBackToPageEvent;

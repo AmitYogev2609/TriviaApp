@@ -4,7 +4,7 @@
              x:Class="TriviaXamarinApp.Views.EditQustion">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Enter your own qoustion" FontSize="Large"/>
+            <Label Text="Edite your Question" FontSize="Large"/>
             <Frame CornerRadius="50">
                 <Entry Text="{Binding Qustion}" Placeholder="Enter Qustion"/>
             </Frame>

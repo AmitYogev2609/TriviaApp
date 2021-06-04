@@ -72,7 +72,8 @@ namespace TriviaXamarinApp.ViewModels
             }
         }
         private Color Color;
-
+        public string NickName { get=>nick;  }
+        private string nick;
         public MainMenuViewModel()
         {
             answerList = new ObservableCollection<string>();
@@ -83,6 +84,10 @@ namespace TriviaXamarinApp.ViewModels
 
 
             SetupQus();
+            if(((App)App.Current).CurrnetUser!=null)
+            {
+                nick = ((App)App.Current).CurrnetUser.NickName;
+            }
             
         }
         public async void SetupQus()
@@ -149,7 +154,6 @@ namespace TriviaXamarinApp.ViewModels
                 SetupQus();
             }
         }
-       
         public void Checkthree()
         {
             if (((App)App.Current).IsNew && NumCorrectQus ==0 )
@@ -157,6 +161,12 @@ namespace TriviaXamarinApp.ViewModels
                 AddQoutions();
                 ((App)App.Current).IsNew = false;
             }
+        }
+        public ICommand Logout => new Command(LogOut);
+        public void LogOut()
+        {
+            ((App)App.Current).CurrnetUser = null;
+            App.Current.MainPage = ((App)App.Current).login;
         }
     }
 }

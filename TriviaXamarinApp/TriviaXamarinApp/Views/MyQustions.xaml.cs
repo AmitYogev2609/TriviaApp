@@ -22,7 +22,14 @@ namespace TriviaXamarinApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            try
+            { 
             ((MyQoustionViewModel)this.BindingContext).GetQustion();
+            }
+            catch(Exception e)
+            {
+                LoginViewModel.openMainPage();
+            }
         }
         public async void NavigateToAsync(Page p)
         {

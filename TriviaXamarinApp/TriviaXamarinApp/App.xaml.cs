@@ -10,7 +10,7 @@ namespace TriviaXamarinApp
 {
     public partial class App : Application
     {
-        public TriviaWebAPIProxy WebAPI { get; set; }
+        
         public User CurrnetUser { get; set; }
         public Page intial { get; set; }
         public Page login { get; set; }
@@ -20,7 +20,7 @@ namespace TriviaXamarinApp
         {
             InitializeComponent();
 
-            WebAPI = TriviaWebAPIProxy.CreateProxy();
+            
             //MainPage = new NavigationPage(new StartPage());
             MainPage = new NavigationPage(new StartPage());
             intial = MainPage;

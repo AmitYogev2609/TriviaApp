@@ -58,11 +58,7 @@ namespace TriviaXamarinApp.ViewModels
                 }
             } }
         private string passweord;
-        private bool t;
-        public void set(bool t)
-        {
-            this.t = t;
-        }
+        
         public LoginViewModel()
         {
             IsVisible = false;
@@ -109,7 +105,8 @@ namespace TriviaXamarinApp.ViewModels
         private string eMes;
         public async void Login()
         {
-            ((App)App.Current).CurrnetUser = await TriviaWebAPIProxy.CreateProxy().LoginAsync(Email, Password);
+            
+           ((App)App.Current).CurrnetUser = await TriviaWebAPIProxy.CreateProxy().LoginAsync(Email, Password);
             
       
             if(((App)App.Current).CurrnetUser == null)
@@ -126,6 +123,14 @@ namespace TriviaXamarinApp.ViewModels
         {
             
             ((App)App.Current).MainPage = ((App)App.Current).tabbed;
+        }
+        public void Reset()
+        {
+            IsVisible = false;
+            LogVis = true;
+            erorMesVis = false;
+            this.Email = "";
+            this.Password = "";
         }
     }
 }

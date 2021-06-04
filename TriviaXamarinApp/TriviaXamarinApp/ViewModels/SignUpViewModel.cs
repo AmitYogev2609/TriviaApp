@@ -88,5 +88,12 @@ namespace TriviaXamarinApp.ViewModels
                 IsVisible=true;
             }
         }
+        public void rest()
+        {
+            IsVisible = false;
+            Email = "";
+            NickName = "";
+            Password = "";
+        }
     }
 }

@@ -25,5 +25,11 @@ namespace TriviaXamarinApp.Views
         {
             await Navigation.PushAsync(p);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((LoginViewModel)this.BindingContext).Reset();
+        }
     }
 }

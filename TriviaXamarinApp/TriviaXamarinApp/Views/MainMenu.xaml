@@ -21,7 +21,16 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-   
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="Log out"
+                Command="{Binding Logout}"
+                     
+                 Order="Primary"
+                  />
+       
+
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
 
         <StackLayout>
