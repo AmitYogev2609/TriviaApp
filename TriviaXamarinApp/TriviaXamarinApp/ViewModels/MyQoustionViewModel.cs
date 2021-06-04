@@ -28,16 +28,45 @@ namespace TriviaXamarinApp.ViewModels
             QuestionsList = new ObservableCollection<AmericanQuestion>();
             
         }
-        public  void GetQustion()
+        public AmericanQuestion SelctedQuestion { get=>selcted; set
+            {
+                if(value!=selcted)
+                {
+                    selcted = value;
+                    OnPropertyChanged(nameof(SelctedQuestion));
+                }
+            } }
+        private AmericanQuestion selcted;
+        public ICommand DeleteCommand => new Command<AmericanQuestion>(Delete);
+        public ICommand EditCommand=> new Command<AmericanQuestion>(edite);
+        public async void Delete(AmericanQuestion question)
+        {
+            try
+            { 
+            this.QuestionsList.Remove(question);
+            ((App)App.Current).CurrnetUser.Questions.Remove(question);
+                
+            bool iscon = await TriviaWebAPIProxy.CreateProxy().DeleteQuestion(question);
+            }
+            catch(Exception e) { }
+        }
+        public void GetQustion()
         {
             QuestionsList.Clear();
             if((((App)App.Current).CurrnetUser)!=null)
-            { 
-            foreach (var item in ((App)App.Current).CurrnetUser.Questions)
             {
-                this.QuestionsList.Add(item);
+               
+                    foreach (var item in ((App)App.Current).CurrnetUser.Questions)
+                    {
+                         this.QuestionsList.Add(item);
+                    }
             }
-            }
+        }
+        public event Action<Page> NavigateToPageEvent;
+        public void edite(AmericanQuestion question)
+        {
+            Page p = new EditQustion(question);
+            NavigateToPageEvent?.Invoke(p);
         }
         
     }

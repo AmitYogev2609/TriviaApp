@@ -16,12 +16,17 @@ namespace TriviaXamarinApp.Views
         {
             InitializeComponent();
             MyQoustionViewModel context = new MyQoustionViewModel();
+            context.NavigateToPageEvent += NavigateToAsync;
             this.BindingContext = context;
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             ((MyQoustionViewModel)this.BindingContext).GetQustion();
+        }
+        public async void NavigateToAsync(Page p)
+        {
+            await Navigation.PushAsync(p);
         }
     }
 }

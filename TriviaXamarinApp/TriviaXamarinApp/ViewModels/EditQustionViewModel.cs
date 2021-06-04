@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Threading;
@@ -15,50 +14,63 @@ using TriviaXamarinApp.Views;
 
 namespace TriviaXamarinApp.ViewModels
 {
-    class AddQustionViewModel:INotifyPropertyChanged
+    class EditQustionViewModel:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        public ObservableCollection<string> WrongAnswerList { get; set; }
-        public string RightAnswer { get=>rightanswer; set
+       
+       
+        public string RightAnswer
+        {
+            get => rightanswer; set
             {
                 if (value != rightanswer)
                 {
                     rightanswer = value;
                     OnPropertyChanged(nameof(RightAnswer));
                 }
-            } }
+            }
+        }
         private string rightanswer;
-        public string Qustion { get=>qustion; set
+        public string Qustion
+        {
+            get => qustion; set
             {
-                if(value!=qustion)
+                if (value != qustion)
                 {
                     qustion = value;
                     OnPropertyChanged(nameof(Qustion));
                 }
-            } }
+            }
+        }
         private string qustion;
-        public bool IsVisible { get=>isvisible; set
+        public bool IsVisible
+        {
+            get => isvisible; set
             {
-                if(value!=isvisible)
+                if (value != isvisible)
                 {
                     isvisible = value;
                     OnPropertyChanged(nameof(IsVisible));
                 }
-            } }
+            }
+        }
         private bool isvisible;
-        public string WrongAnswer1 { get=>wrong1; set
+        public string WrongAnswer1
+        {
+            get => wrong1; set
             {
-                if(value!=wrong1)
+                if (value != wrong1)
                 {
                     wrong1 = value;
                     OnPropertyChanged(nameof(WrongAnswer1));
                 }
-            } }
-        private string wrong1; 
+            }
+        }
+        private string wrong1;
         public string WrongAnswer2
         {
             get => wrong2; set
@@ -83,36 +95,56 @@ namespace TriviaXamarinApp.ViewModels
             }
         }
         private string wrong3;
-        public AddQustionViewModel()
+       
+        private AmericanQuestion Copy;
+        public EditQustionViewModel(AmericanQuestion q)
         {
-            
-            
+            this.Copy = q;
+            this.Qustion = q.QText;
+            this.RightAnswer = q.CorrectAnswer;
+            this.WrongAnswer1 = q.OtherAnswers[0];
+            this.WrongAnswer2 = q.OtherAnswers[1];
+            this.WrongAnswer3 = q.OtherAnswers[2];
+            IsVisible = false;
+            isvisible = false;
+
         }
-        public ICommand AddCommand => new Command(AddQustion);
-        public async void AddQustion()
+        public ICommand EditCommand => new Command(EdtiQustion);
+        public async void EdtiQustion()
         {
             List<string> list = new List<string>();
-            
-                list.Add(WrongAnswer1);
+
+            list.Add(WrongAnswer1);
             list.Add(WrongAnswer2);
             list.Add(WrongAnswer3);
             AmericanQuestion question = new AmericanQuestion()
             {
-                CreatorNickName= ((App)App.Current).CurrnetUser.NickName,
-                QText=Qustion,
-                CorrectAnswer=RightAnswer,
-                OtherAnswers=list.ToArray()
+                CreatorNickName = Copy.CreatorNickName,
+                QText = Qustion,
+                CorrectAnswer = RightAnswer,
+                OtherAnswers = list.ToArray()
             };
-            bool IsAdd = await TriviaWebAPIProxy.CreateProxy().PostNewQuestion(question);
-            if(IsAdd)
+            try
             {
-                ((App)App.Current).CurrnetUser.Questions.Add(question);
-                NavigateBackToPageEvent?.Invoke();
+                bool isRemove = await TriviaWebAPIProxy.CreateProxy().DeleteQuestion(Copy);
+                bool isAdd = await TriviaWebAPIProxy.CreateProxy().PostNewQuestion(question);
+                if (isAdd && isRemove)
+                {
+
+                    int x= ((App)App.Current).CurrnetUser.Questions.IndexOf(Copy);
+                    ((App)App.Current).CurrnetUser.Questions[x] = question;
+
+                    NavigateBackToPageEvent?.Invoke();
+
+
+
+                }
             }
-            else
+            catch(Exception E)
             {
                 IsVisible = true;
             }
+            
         }
         public event Action NavigateBackToPageEvent;
     }

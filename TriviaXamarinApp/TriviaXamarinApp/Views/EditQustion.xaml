@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TriviaXamarinApp.Views.AddQustion">
+             x:Class="TriviaXamarinApp.Views.EditQustion">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Enter your own qoustion" FontSize="Large"/>
@@ -12,7 +12,7 @@
                 <Entry Text="{Binding RightAnswer}" Placeholder="Enter correct answer"  />
             </Frame>
             <Frame CornerRadius="50" BackgroundColor="Red">
-                <Entry Text="{Binding WrongAnswer1}" Placeholder="Enter worng answer 1" />
+                <Entry Text="{Binding WrongAnswer1}"  />
             </Frame>
             <Frame CornerRadius="50" BackgroundColor="Red">
                 <Entry Text="{Binding WrongAnswer2}" Placeholder="Enter worng answer 2" />
@@ -20,9 +20,8 @@
             <Frame CornerRadius="50" BackgroundColor="Red">
                 <Entry Text="{Binding WrongAnswer3}" Placeholder="Enter worng answer 3" />
             </Frame>
-            <Button Text="Submit" Command="{Binding AddCommand}" HorizontalOptions="Center"/>
+            <Button Text="Save" Command="{Binding EditCommand}" HorizontalOptions="Center"/>
             <Label Text="somthing went wrong" IsVisible="{Binding IsVisible}" TextColor="Red"/>
-           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -17,11 +17,14 @@ namespace TriviaXamarinApp.Views
         {
             InitializeComponent();
             this.Children.Add(new MainMenu()
-            { Title="main page"});
-            this.Children.Add(new MyQustions() { Title= "My Qustions",
-            IconImageSource= "https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            }
-            );
+            { Title="Main Page"});
+            Page p = new MyQustions()
+            {
+                Title = "My Qustions",
+                IconImageSource = "https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
+            };
+            
+            this.Children.Add(new NavigationPage(p) { Title= "My Qustions" });
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
         }
     }

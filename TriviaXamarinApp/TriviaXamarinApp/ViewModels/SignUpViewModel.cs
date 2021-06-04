@@ -70,7 +70,8 @@ namespace TriviaXamarinApp.ViewModels
             {
                 Email = this.Email,
                 NickName = this.NickName,
-                Password = this.Password
+                Password = this.Password,
+                Questions = new List<AmericanQuestion>()
                 
 
             };
@@ -78,7 +79,7 @@ namespace TriviaXamarinApp.ViewModels
             
             if(await TriviaWebAPIProxy.CreateProxy().RegisterUser(user))
             {
-                NavigateToPageEvent?.Invoke();
+                //NavigateToPageEvent?.Invoke();
                 ((App)App.Current).CurrnetUser = user;
                LoginViewModel.openMainPage();
             }

@@ -26,14 +26,14 @@
 
         <StackLayout>
             <Label Text="Answer 3 correct answer and enter your own one " FontSize="Large"/>
-            <Label  Text="{Binding NumCorrectQus,StringFormat='Number of correct answer:{0}'}"/>
+            <Label  Text="{Binding NumCorrectQus,StringFormat='Number of correct answer:{0}'}" FontSize="Large"/>
             <Label Text="{Binding Question}" HorizontalOptions="FillAndExpand"  FontSize="Large"/>
             <CollectionView ItemsSource="{Binding answerList}" 
                 SelectionMode="Single"
                 SelectedItem="{Binding CorectAnswer}"  x:Name="answerslst">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="50">
+                        <Frame CornerRadius="50" BorderColor="Black">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -45,7 +45,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding}" Grid.Column="0" Grid.Row="0" FontSize="Medium"/>
-                                <Frame CornerRadius="1000"   HorizontalOptions="End" Grid.Column="1" Grid.Row="0"/>
+                                <Frame CornerRadius="1000"   HorizontalOptions="End" Grid.Column="1" Grid.Row="0" BorderColor="Black"/>
                             </Grid>
                         </Frame>
 
