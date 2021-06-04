@@ -14,7 +14,7 @@ using TriviaXamarinApp.Views;
 
 namespace TriviaXamarinApp.ViewModels
 {
-    class MainMenu:INotifyPropertyChanged
+    class MainMenuViewModel:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name = null)
@@ -73,7 +73,7 @@ namespace TriviaXamarinApp.ViewModels
         }
         private Color Color;
 
-        public MainMenu()
+        public MainMenuViewModel()
         {
             answerList = new ObservableCollection<string>();
             numco = 0;
@@ -83,6 +83,7 @@ namespace TriviaXamarinApp.ViewModels
 
 
             SetupQus();
+            
         }
         public async void SetupQus()
         {
@@ -118,11 +119,13 @@ namespace TriviaXamarinApp.ViewModels
             }
         }
        
-        
         public ICommand PressCommand => new Command(refreshAnCheck);
+        public event Action<Page> NavigateToPageEvent;
+        
         public void AddQoutions()
         {
-
+            Page page = new AddQustion();
+            NavigateToPageEvent?.Invoke(page);
         }
         public async void refreshAnCheck()
         {
@@ -134,8 +137,9 @@ namespace TriviaXamarinApp.ViewModels
 
                 if (NumCorrectQus >= 3)
                 {
-                    AddQoutions();
                     this.NumCorrectQus = 0;
+                    AddQoutions();
+                    
                 }
 
             }
@@ -143,6 +147,15 @@ namespace TriviaXamarinApp.ViewModels
             if (!con)
             {
                 SetupQus();
+            }
+        }
+       
+        public void Checkthree()
+        {
+            if (((App)App.Current).IsNew && NumCorrectQus ==0 )
+            {
+                AddQoutions();
+                ((App)App.Current).IsNew = false;
             }
         }
     }

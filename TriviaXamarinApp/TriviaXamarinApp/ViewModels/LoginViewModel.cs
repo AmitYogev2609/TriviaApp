@@ -87,7 +87,7 @@ namespace TriviaXamarinApp.ViewModels
            
                 NavigateToPageEvent?.Invoke(sign);
 
-            //openMainPage();
+           
         }
         public string ErrorMes { get=>eMes; set
             {
@@ -122,8 +122,9 @@ namespace TriviaXamarinApp.ViewModels
                 openMainPage();
             }
         }
-        public void openMainPage()
+        public static void openMainPage()
         {
+            
             ((App)App.Current).MainPage = ((App)App.Current).tabbed;
         }
     }

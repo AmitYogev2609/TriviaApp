@@ -4,9 +4,27 @@
              x:Class="TriviaXamarinApp.Views.AddQustion">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Frame CornerRadius="50">
+                <Entry Text="{Binding Qustion}" Placeholder="Enter Qustion"/>
+            </Frame>
+            <Frame CornerRadius="50">
+                <Entry Text="{Binding RightAnswer}" Placeholder="Enter correct answer" BackgroundColor="Green" />
+            </Frame>
+            <CollectionView ItemsSource="{Binding WrongAnswerList}" 
+                SelectionMode="Single"
+                >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame CornerRadius="50">
+                            <Entry Text="{Binding}" Placeholder="enter worng answer" BackgroundColor="Red"/>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Submit" Command="{Binding AddCommand}" HorizontalOptions="Center"/>
+            <Label Text="somthing went wrong" IsVisible="{Binding IsVisible}" TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

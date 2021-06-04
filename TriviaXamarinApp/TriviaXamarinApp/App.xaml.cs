@@ -21,11 +21,12 @@ namespace TriviaXamarinApp
             InitializeComponent();
 
             WebAPI = TriviaWebAPIProxy.CreateProxy();
-            MainPage = new NavigationPage(new TabbedPage());
+            //MainPage = new NavigationPage(new StartPage());
+            MainPage = new NavigationPage(new StartPage());
             intial = MainPage;
             login = new NavigationPage(new LoginPage());
             IsNew = false;
-            tabbed = new NavigationPage(new MainTabbed());
+            tabbed = new NavigationPage(new TabbedPage1());
         }
         
         protected override void OnStart()

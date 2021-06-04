@@ -80,6 +80,7 @@ namespace TriviaXamarinApp.ViewModels
             {
                 NavigateToPageEvent?.Invoke();
                 ((App)App.Current).CurrnetUser = user;
+               LoginViewModel.openMainPage();
             }
             else
             {
