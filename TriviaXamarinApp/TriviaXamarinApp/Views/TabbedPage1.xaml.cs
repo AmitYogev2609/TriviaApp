@@ -21,7 +21,7 @@ namespace TriviaXamarinApp.Views
             Page p = new MyQustions()
             {
                 Title = "My Qustions",
-                IconImageSource = "https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
+               
             };
             
             this.Children.Add(new NavigationPage(p) { Title= "My Qustions" });
