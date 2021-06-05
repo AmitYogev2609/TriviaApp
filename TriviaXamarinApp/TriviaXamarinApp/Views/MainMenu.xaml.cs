@@ -24,7 +24,7 @@ namespace TriviaXamarinApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ((MainMenuViewModel)this.BindingContext).Checkthree();
+            ((MainMenuViewModel)this.BindingContext).check();
 
         }
         public async void MoveToAddQu(Page p)

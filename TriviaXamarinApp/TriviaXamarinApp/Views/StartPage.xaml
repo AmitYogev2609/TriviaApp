@@ -34,7 +34,7 @@
         <ToolbarItem Text="Login"
                 Command="{Binding GotoLogin}"
                      
-                 Order="Primary"
+                 Order="Secondary"
                   />
         
     </ContentPage.ToolbarItems>

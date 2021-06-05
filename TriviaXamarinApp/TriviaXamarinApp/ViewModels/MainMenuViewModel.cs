@@ -81,8 +81,16 @@ namespace TriviaXamarinApp.ViewModels
 
             ChangeColor = new Color();
             Color = new Color();
-
-
+            if(((App)App.Current).IsNew != false)
+            {
+                Isvisible = true;
+                Show = false;
+            }
+            else
+            { 
+            Isvisible = false;
+               Show = true;
+            }
             SetupQus();
             if(((App)App.Current).CurrnetUser!=null)
             {
@@ -154,13 +162,28 @@ namespace TriviaXamarinApp.ViewModels
                 SetupQus();
             }
         }
+        public void check()
+        {
+            if (((App)App.Current).IsNew != false)
+            {
+                Isvisible = true;
+                Show = false;
+            }
+            else
+            {
+                Isvisible = false;
+                Show = true;
+            }
+        }
         public void Checkthree()
         {
-            if (((App)App.Current).IsNew && NumCorrectQus ==0 )
-            {
+            
+                
                 AddQoutions();
+            Isvisible = false;
+            Show = true;
                 ((App)App.Current).IsNew = false;
-            }
+            
         }
         public ICommand Logout => new Command(LogOut);
         public void LogOut()
@@ -168,5 +191,24 @@ namespace TriviaXamarinApp.ViewModels
             ((App)App.Current).CurrnetUser = null;
             App.Current.MainPage = ((App)App.Current).login;
         }
+        public bool Isvisible { get=>isvisble; set
+            {
+                if(value!=isvisble)
+                {
+                    isvisble = value;
+                    OnPropertyChanged(nameof(Isvisible));
+                }
+            } }
+        public bool Show { get=>show; set
+            {
+                if(show!=value)
+                {
+                    show = value;
+                    OnPropertyChanged(nameof(Show));
+                }
+            } }
+        private bool isvisble;
+        private bool show;
+        public ICommand EnterQues => new Command(Checkthree);
     }
 }

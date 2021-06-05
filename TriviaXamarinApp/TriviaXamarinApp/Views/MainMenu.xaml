@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaXamarinApp.Views.MainMenu"
               BackgroundColor="{Binding ChangeColor}"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+           x:Name="page" >
     <ContentPage.Resources >
         <Style  TargetType="Frame">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -25,15 +26,19 @@
 
         <ToolbarItem Text="Log out"
                 Command="{Binding Logout}"
-                     
-                 Order="Primary"
+                 Order="Secondary"
                   />
-       
+        
+
 
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-
         <StackLayout>
+            <StackLayout IsVisible="{Binding  Isvisible}">
+                <Label Text="You can enter a new qoution "  FontSize="Large"/>
+                <Button Text="click here to enter" Command="{Binding EnterQues}"/>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding Show}">
             <Label Text="Answer 3 correct answer and enter your own one " FontSize="Large"/>
             <Label  Text="{Binding NumCorrectQus,StringFormat='Number of correct answer:{0}'}" FontSize="Large"/>
             <Label Text="{Binding Question}" HorizontalOptions="FillAndExpand"  FontSize="Large"/>
@@ -64,6 +69,7 @@
 
             <Button Text="check answer" Command="{Binding PressCommand}" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" />
 
+        </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
